@@ -1,0 +1,62 @@
+/*
+
+Everything is just a state plus actions based on events that change that state. (Redux philosophy). 
+  state is matter, actions are time modifying the state based on events (rules of physics)
+
+This database is like SAP, defines all there is to the app. On top of it we can add UI to interact and reports to display the data.
+
+It is important to note, that even if we can write the database configuration structure in a tree like syntax, it will be flatened in a 2D database.
+
+The database configuration is in place to check the data format that is being stored.
+
+Functionalities I want:
+- Number of ocurrences of a property
+- Roles that have access to that info
+- How a node is removed when removing another
+- (store parent node in hidden field)
+  - hidden fields: .id, .parent, 
+- options, whether you have to choose one among a list of fields
+- regex validation for field
+- validation: link to an action (a functions)
+- Have a very visual interface to create all this data.
+- Enable SQL and NO-SQL patterns.
+- Provide a package to create a SAP.
+- Allow to add image (only in SVG, to describe the field.)
+- You can have predefined modules and extensions. The system ask you for questions and configures the system for you. Also creates the documentation and functional decisions for you will diagrams and blocks. (Follow Accenture's AP322 and AP350).
+- For each item you create have suggested fields (in the future), database of all that has  been created and is standard.
+
+
+*/
+
+//Config File
+
+firebase {
+  key: ...,
+  domain: ...,
+  offline: true,
+}
+
+data {
+
+}
+
+events {
+
+}
+
+actions {
+  item.onChange //it exists for all the properties.
+  item.onCreate
+  item.onRemove
+  action(event, modifier, property) {
+    //when the event happens the data in the modifier is used to update the property.
+  }
+
+}
+
+//Entries file: The file containing the actual data attending the structure from the config.
+
+
+//Reports: Define the data models to be shown. Kind of like a pivot table: rows, columns and filters. Type of display, table, graph, ... KPI definition. Allow for the automatic creation of screens to modify data according to actions. Also be able to create documents, like facturas de PO-s, etc..
+
+//UI: The UI is defined through the use of web components that merge all the pieces together. Provide a very nice way to create "SAP transaction" and forms.

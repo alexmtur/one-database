@@ -1,0 +1,90 @@
+//In this example will demonstrate how to create a note app. Save it as a .one file. All this magic only works in one files. No dom bind. Ideas: https://github.com/TheLarkInn/unity-component-specification
+
+//maybe there is no need to compile it to webcomponents. Fake shadow dom like scoped DOM put everything into "one-element" class, and all the CSS and HTML properties are scoped to that. That way no extra trick required for SSR. 
+
+//Define the library in a way to write native web components through compilation. Abstract away all difficulties.
+
+//For offline first capabilities maybe use firebase, redux-offline.
+
+//Write firabase code using JS and not polymer
+
+//Write the router module
+
+//In any element we may write: <div for={{items, has to be an array}} or times={{expresion, has to resolve to a number}}></div>
+
+package my-name //has to be a unique identifier
+<my-element> //with this we can already define the element. No need for shitty constructors and defining... It already does that on the background.
+  <splashscreen> //This would go in the app level
+  </splashscreen>
+  logo = my_logo.svg //compiles it and writes the manifest with all the possible formats. For us the manifest is the config here.
+  <login>
+    config { //instead of writing all the attributes, we can use this JSON styling.
+      methods: [google, facebook, twitter];
+      require login; //opposite would be, login optional
+      enter-animation: fade-in; //all objects get this property to configure.
+      exit-animation; fade-out;
+      visible: {{someValue}}, true;
+    }
+  </login>
+  <script src="...">//If the logic is defined elsewhere.
+  <style>
+    <div> //put a <template> wrapper or maybe just a #Structure decorator
+      <page url="/profile/{{user.id}}" default>
+
+      <page>
+      <button url="profile/{{user.id}}">Profile<profile> //Routes the app to profile
+      <input value={{note.content}} type="text" placeholder="Write a note.">
+      <button save="{{note}}">Post button</button> //it already knows how to push note to notes.
+      <all {{notes}} filter>
+        <p>{{item.index}}: {{item.userId to userName}} {{item.content}}</p> //also allow the pipe "|" instead of the "to"
+      </all>
+      <input type="image" value="{{image}}" placeholder="Add image"> //Turns the camera and callery input. There is also type audio and video.
+      <if {{image!==undefined}}> //shows if the statement is true.
+        <img src="{{image}}">
+      </if>
+      <input type="audio"> //You may press and hold to record audio. Or tap to select from device. Same for video and camera.
+
+
+
+    </div>
+    data {
+      SQL; //The type can be defined, SQL, non sql or anything in between;
+      strict; //means that only stores the data if it matches the template.
+      offline-first; //All this config is already provided by default. Only write if we need any other value.
+      user{ 
+        id
+        string *name //you can use the * to define the primary keys
+        string *surname
+        privateData {
+          //hierarchies can be established.
+        }
+      }
+      note in notes {
+        user.id; //establish relationships between tables
+        string content; //allow for typed language for comprobations.
+        owner; //by default populates with the user that has created it;
+
+      }
+    }
+  config {
+    #button1.onClick() {
+      this.notes.push(note);
+
+    }
+    
+  }
+</my-element>
+
+//They can be defined each module in a different file. In this example we will put the styling in a different file.
+
+package my-name
+<my-element> 
+  h1 { //allow for SCSS by default and then compile it to CSS. 
+    padding: 0px;
+    p {
+      padding: 3px;
+      color: {{myColor('red')}} //insted of using the shitty nomenclature for css variables, use the standard across all the elements
+    }
+  }
+  camera integration and push notifications. Share with other apps and access to contacts.
+<my-element>
